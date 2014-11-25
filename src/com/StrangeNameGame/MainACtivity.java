@@ -1,11 +1,15 @@
 package com.StrangeNameGame;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.view.View;
+import android.widget.LinearLayout;
 import org.json.JSONArray;
 
 import java.security.acl.LastOwnerException;
@@ -13,36 +17,52 @@ import java.security.acl.LastOwnerException;
 public class MainACtivity extends Activity {
 
 
-    ImageView image;
+    ImageView topLeft, topRight, botLeft, botRight;
+    LinearLayout russianLettersTop,russianLettersBot;
 
-    /**
-     * <p>Проверяет, допустимый ли ход.</p>
-     * <p>Например, чтобы задать ход e2-e4, напишите isValidMove(5,2,5,4);
-     * Чтобы записать рокировку, укажите, откуда и куда ходит король.
-     * Например, для короткой рокировки чёрных запишите isValidMove(5,8,7,8);</p>
-     *
-     * @param fromCol Вертикаль, на которой находится фигура (1=a, 8=h)
-     * @param fromRow Горизонталь, на которой находится фигура (1...8)
-     * @param toCol   Вертикаль клетки, на которую выполняется ход (1=a, 8=h)
-     * @param toRow   Горизонталь клетки, на которую выполняется ход (1...8)
-     * @return true, если ход допустим, и false, если недопустим
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        image = (ImageView) findViewById(R.id.imageView1);
-        image.setImageResource(R.drawable.putin);
+        initView();
 
-        image = (ImageView) findViewById(R.id.imageView2);
-        image.setImageResource(R.drawable.putin);
 
-        image = (ImageView) findViewById(R.id.imageView3);
-        image.setImageResource(R.drawable.putin);
 
-        image = (ImageView) findViewById(R.id.imageView4);
-        image.setImageResource(R.drawable.putin);
+    }
 
-        int pushMe = 2;
+    /**
+     * Initialize view elements
+     */
+    private void initView()
+    {
+        topLeft = (ImageView) findViewById(R.id.imageView1);
+
+        topRight = (ImageView) findViewById(R.id.imageView2);
+
+        botLeft = (ImageView) findViewById(R.id.imageView3);
+
+        botRight = (ImageView) findViewById(R.id.imageView4);
+
+        russianLettersTop = (LinearLayout) findViewById(R.id.russianLetters);
+        russianLettersBot = (LinearLayout) findViewById(R.id.russianLetters2);
+        for ( int i = 0; i < 5; i++ )
+        {
+            ImageView imageView = new ImageView(this);
+            imageView.setPadding(0,0,0,0);
+            imageView.setImageResource(R.drawable.twitter01);
+            imageView.setLayoutParams(new ActionBar.LayoutParams(128,128));
+            russianLettersTop.addView(imageView);
+
+            ImageView imageViewBot = new ImageView(this);
+            imageViewBot.setPadding(0,0,0,0);
+            imageViewBot.setImageResource(R.drawable.twitter01);
+            imageViewBot.setLayoutParams(new ActionBar.LayoutParams(128,128));
+            russianLettersBot.addView(imageViewBot);
+        }
+
+
+
+
+
     }
 }
