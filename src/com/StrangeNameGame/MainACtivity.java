@@ -2,6 +2,7 @@ package com.StrangeNameGame;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import android.os.Bundle;
@@ -10,22 +11,32 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import org.json.JSONArray;
+import org.w3c.dom.Text;
 
 import java.security.acl.LastOwnerException;
+import java.util.Random;
 
 public class MainACtivity extends Activity {
 
 
     ImageView topLeft, topRight, botLeft, botRight;
     LinearLayout russianLettersTop,russianLettersBot;
+    String [] values;
+    String secretWord;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        initView();
 
+        // Getting all words
+        values = getResources().getStringArray(R.array.words);
+        // Choosing secret word from string array
+        secretWord = values[randInt(0,values.length - 1)];
+
+        initView();
 
 
     }
@@ -45,24 +56,54 @@ public class MainACtivity extends Activity {
 
         russianLettersTop = (LinearLayout) findViewById(R.id.russianLetters);
         russianLettersBot = (LinearLayout) findViewById(R.id.russianLetters2);
-        for ( int i = 0; i < 5; i++ )
+
+        TextView titleText = (TextView) findViewById(R.id.titleText);
+        titleText.setText(secretWord);
+
+
+        secretWord = "тураль";
+
+        for ( int i = 0; i < secretWord.length(); i++ )
         {
             ImageView imageView = new ImageView(this);
-            imageView.setPadding(0,0,0,0);
-            imageView.setImageResource(R.drawable.twitter01);
-            imageView.setLayoutParams(new ActionBar.LayoutParams(128,128));
+
+
+            int diff = secretWord.charAt(i) - 'а';
+
+            String fnm = "letter" + String.valueOf(diff+1); //  this is image file name
+            String PACKAGE_NAME = getApplicationContext().getPackageName();
+            int imgId = getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+            imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), imgId));
+
+            imageView.setLayoutParams(new ActionBar.LayoutParams(128, 128));
             russianLettersTop.addView(imageView);
 
-            ImageView imageViewBot = new ImageView(this);
-            imageViewBot.setPadding(0,0,0,0);
-            imageViewBot.setImageResource(R.drawable.twitter01);
-            imageViewBot.setLayoutParams(new ActionBar.LayoutParams(128,128));
-            russianLettersBot.addView(imageViewBot);
+            if ( i%2 != 0 )
+            {
+                ImageView imageViewBot = new ImageView(this);
+                imageViewBot.setPadding(0,0,0,0);
+                imageViewBot.setImageResource(R.drawable.letter11);
+                imageViewBot.setLayoutParams(new ActionBar.LayoutParams(128,128));
+                russianLettersBot.addView(imageViewBot);
+            }
         }
 
 
 
 
 
+    }
+
+    /**
+     * Generate random integer number in [min;max]
+     * @param min
+     * @param max
+     * @return random value in the interval
+     */
+    private static int randInt(int min, int max)
+    {
+        Random rand = new Random();
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        return randomNum;
     }
 }

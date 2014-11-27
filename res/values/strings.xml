@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">StrangeNameGame</string>
+
+    <string-array name="words">
+        <item>мама</item>
+        <item>папа</item>
+        <item>брат</item>
+        <item>небо</item>
+        <item>вода</item>
+        <item>заря</item>
+        <item>море</item>
+        <item>коса</item>
+        <item>роса</item>
+        <item>стог</item>
+        <item>слой</item>
+        <item>смех</item>
+        <item>грех</item>
+        <item>черт</item>
+        <item>торт</item>
+        <item>мрак</item>
+        <item>ночь</item>
+        <item>день</item>
+        <item>пень</item>
+        <item>волк</item>
+    </string-array>
 </resources>
