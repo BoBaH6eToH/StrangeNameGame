@@ -67,7 +67,6 @@ public class MainACtivity extends Activity {
         {
             ImageView imageView = new ImageView(this);
 
-
             int diff = secretWord.charAt(i) - 'а';
 
             String fnm = "letter" + String.valueOf(diff+1); //  this is image file name
@@ -77,15 +76,6 @@ public class MainACtivity extends Activity {
 
             imageView.setLayoutParams(new ActionBar.LayoutParams(128, 128));
             russianLettersTop.addView(imageView);
-
-            if ( i%2 != 0 )
-            {
-                ImageView imageViewBot = new ImageView(this);
-                imageViewBot.setPadding(0,0,0,0);
-                imageViewBot.setImageResource(R.drawable.letter11);
-                imageViewBot.setLayoutParams(new ActionBar.LayoutParams(128,128));
-                russianLettersBot.addView(imageViewBot);
-            }
         }
 
 
