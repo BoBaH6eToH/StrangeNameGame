@@ -37,6 +37,7 @@ public class MainACtivity extends Activity {
         secretWord = values[randInt(0,values.length - 1)];
 
         initView();
+        int a;
 
 
     }
