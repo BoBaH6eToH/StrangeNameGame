@@ -5,17 +5,10 @@ import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.widget.ImageView;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import org.json.JSONArray;
-import org.w3c.dom.Text;
 
-import java.security.acl.LastOwnerException;
 import java.util.Random;
 
 public class MainACtivity extends Activity {
@@ -37,8 +30,43 @@ public class MainACtivity extends Activity {
         secretWord = values[randInt(0,values.length - 1)];
 
         initView();
+        pushImages(1);
 
 
+    }
+    /**
+     * Inserting images
+     */
+    private void pushImages(int index)
+    {
+        Short countMas = 4;
+        String PACKAGE_NAME = getApplicationContext().getPackageName();
+
+        for (int i = 1; i < countMas + 1; i++)
+        {
+            String path = "image" + String.valueOf(index) + "_" + String.valueOf(i);
+            int imgId = getResources().getIdentifier(PACKAGE_NAME+":drawable/"+path , null, null);
+            if (i == 1)
+            {
+                topLeft.setPadding(10, 10, 10, 10);
+                topLeft.setImageBitmap(BitmapFactory.decodeResource(getResources(), imgId));
+            }
+            if (i == 2)
+            {
+                topRight.setPadding(10, 10, 10, 10);
+                topRight.setImageBitmap(BitmapFactory.decodeResource(getResources(), imgId));
+            }
+            if (i == 3)
+            {
+                botLeft.setPadding(10, 10, 10, 10);
+                botLeft.setImageBitmap(BitmapFactory.decodeResource(getResources(), imgId));
+            }
+            if (i == 4)
+            {
+                botRight.setPadding(10, 10, 10, 10);
+                botRight.setImageBitmap(BitmapFactory.decodeResource(getResources(), imgId));
+            }
+        }
     }
 
     /**
